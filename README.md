@@ -16,27 +16,27 @@
 | birthday           | date   | null: false               |
 
 ### Association
-has_many items
-has_many orders
+has_many :items
+has_many :orders
 
 ## items テーブル
 
-| Column            | Type       | Options                        |
-| ------            | ------     | -----------------------------  |
-| item              | string     | null: false                    |
-| description       | text       | null: false                    |
-| details_category  | text       | null: false                    |
-| details_condition | integer    | null: false                    |
-| shipping_charges  | integer    | null: false                    |
-| shipping_area     | integer    | null: false                    |
-| days_to_ship      | integer    | null: false                    |
-| price             | string     | null: false                    |
-| user              | references | null: false, foreign_key: true |
+| Column               | Type       | Options                        |
+| ------               | ------     | -----------------------------  |
+| item                 | string     | null: false                    |
+| description          | text       | null: false                    |
+| category_id          | integer    | null: false                    |
+| condition_id         | integer    | null: false                    |
+| shipping_charge_id   | integer    | null: false                    |
+| prefecture_id        | integer    | null: false                    |
+| days_to_ship_id      | integer    | null: false                    |
+| price                | integer    | null: false                    |
+| user                 | references | null: false, foreign_key: true |
 
 
 ### Association
-belong_to users
-has_one orders
+belongs_to :users
+has_one :orders
 
 
 ## orders テーブル
@@ -48,23 +48,24 @@ has_one orders
 
 
 ### Association
-belong_to user
-belong_to items
-has_one order_details
+belongs_to :user
+belongs_to :items
+has_one :order_details
 
 
 
 ## orders_details テーブル
 
-| Column       | Type       | Options                        |
-| -------      | ---------- | ------------------------------ |
-| post_code    | string     | null: false                    |
-| prefecture   | integer    | null: false                    |
-| city         | string     | null: false                    |
-| block        | string     | null: false                    |
-| building     | string     |
-| phone number | integer    | null: false                    |
+| Column        | Type       | Options                        |
+| -------       | ---------- | ------------------------------ |
+| post_code     | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| orders        | references | null: false, foreign_key: true |
 
 
 ### Association
-belong_to order
+belongs_to :order
