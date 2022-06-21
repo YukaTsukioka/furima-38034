@@ -107,7 +107,6 @@ RSpec.describe User, type: :model do
       it 'first_name_kanaにカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
         @user.first_name_kana = 'ああああああ'
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("First name kana はカタカナで入力して下さい。")
       end
       it 'birthdayが空では登録できない' do
