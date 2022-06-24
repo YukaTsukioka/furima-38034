@@ -28,16 +28,22 @@ RSpec.describe Item, type: :model do
         @item.price = ''
         @item.valid?  
         
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceが299以下の場合は保存できない' do
+        @item.price = '298'
+        @item.valid?  
+        
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not included in the list")
       end
-      it 'priceは¥300~¥9,999,999の間でないと登録できない' do
-        @item.price = ''
+      it 'priceが10,000,000以上の場合は保存できない' do
+        @item.price = '10,000,001'
         @item.valid?  
-          
+       
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not included in the list")
       end
       it 'priceは半角数値でないと登録できない' do
-        @item.price = ''
+        @item.price = '５５５５５'
         @item.valid? 
          
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not included in the list")
@@ -72,7 +78,18 @@ RSpec.describe Item, type: :model do
         
         expect(@item.errors.full_messages).to include("Days to ship can't be blank")
       end
-
+      it 'imageが空では登録できない' do
+        @item.image = '' 
+        @item.valid?
+        
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it 'ユーザー情報がない場合は登録できないこと' do
+        @item.user = nil
+        @item.valid?
+       
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
 
 
 

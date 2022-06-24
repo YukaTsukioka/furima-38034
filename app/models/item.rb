@@ -7,12 +7,12 @@ class Item < ApplicationRecord
   belongs_to :days_to_ship  
 
   belongs_to :user
-  has_one :order
+  #has_one :order
 
 
 
  
-
+  validates :image, presence: true
   validates :item, presence: true
   validates :description, presence: true
   validates :price, presence: true, inclusion: { in: 300..9_999_999 }
