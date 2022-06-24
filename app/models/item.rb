@@ -11,11 +11,12 @@ class Item < ApplicationRecord
 
 
 
-  validates :title, :text, presence: true
+ 
 
   validates :item, presence: true
   validates :description, presence: true
-  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+  validates :price, presence: true, inclusion: { in: 300..9_999_999 }
+  PRICE_REGEX ={ with: /\A[0-9]+\z/ }
 
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
