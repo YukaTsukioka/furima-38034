@@ -48,17 +48,17 @@ RSpec.describe OrdersOrdersdetail, type: :model do
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number can't be blank")
       end
      
-      it 'phone_numberは半角数値でないと保存できないこと' do
+      it 'phone_numberは10桁以上11桁以内の半角数値でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '２２２２２２２'
         @orders_ordersdetail.valid?
         
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
       end
-      it 'phone_number10桁以上11桁以内でないと保存できないこと' do
-        @orders_ordersdetail.phone_number = '123456789012'
+      
+      it "tokenが空では登録できないこと" do
+        @orders_ordersdetail.token = nil
         @orders_ordersdetail.valid?
-       
-        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid")
+        expect(@orders_ordersdetail.errors.full_messages).to include("Token can't be blank")
       end
     end
 
