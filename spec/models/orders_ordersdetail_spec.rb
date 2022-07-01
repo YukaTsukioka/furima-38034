@@ -4,7 +4,7 @@ RSpec.describe OrdersOrdersdetail, type: :model do
   describe '購入履歴の保存' do
     before do
       user = FactoryBot.create(:user)
-      @orders_ordersdetail = FactoryBot.build(:orders_ordersdetail, user_id: user.id)
+      @orders_ordersdetail = FactoryBot.build(:orders_ordersdetail, user_id: user.id, item_id: item.id)
     end
 
     context '内容に問題ない場合' do
