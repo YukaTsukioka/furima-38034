@@ -30,10 +30,10 @@ RSpec.describe OrdersOrdersdetail, type: :model do
         @orders_ordersdetail.valid?
         expect(@orders_ordersdetail.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
-      it '都道府県に「---」が選択されている場合は購入できない' do
-        @orders_ordersdetail.prefecture_id = ''
+      it 'prefectureが未選択では登録できない' do
+        @orders_ordersdetail.prefecture_id = '1'
         @orders_ordersdetail.valid?
-       
+      
         expect(@orders_ordersdetail.errors.full_messages).to include("Prefecture can't be blank")
       end
 
