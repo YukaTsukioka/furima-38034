@@ -52,13 +52,13 @@ RSpec.describe OrdersOrdersdetail, type: :model do
       it 'phone_numberは半角数値でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '２２２２２２２'
         @orders_ordersdetail.valid?
-        
+       
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
       end
       it 'phone_numberは10桁以上11桁以内でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '1234567890123'
         @orders_ordersdetail.valid?
-        
+       
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
       end
        
@@ -71,14 +71,15 @@ RSpec.describe OrdersOrdersdetail, type: :model do
       it "user_idが空では登録できないこと" do
         @orders_ordersdetail.user_id =  ''
         @orders_ordersdetail.valid?
-        binding.pry
-        expect(@orders_ordersdetail.errors.full_messages).to include("")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("User can't be blank")
       end
 
       it "item_idが空では登録できないこと" do
         @orders_ordersdetail.item_id =  ''
         @orders_ordersdetail.valid?
-        expect(@orders_ordersdetail.errors.full_messages).to include("")
+       
+        expect(@orders_ordersdetail.errors.full_messages).to include("Item can't be blank")
       end
 
     end
