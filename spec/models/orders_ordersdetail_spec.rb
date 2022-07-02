@@ -4,6 +4,7 @@ RSpec.describe OrdersOrdersdetail, type: :model do
   describe '購入履歴の保存' do
     before do
       user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
       @orders_ordersdetail = FactoryBot.build(:orders_ordersdetail, user_id: user.id, item_id: item.id)
     end
 
@@ -48,18 +49,38 @@ RSpec.describe OrdersOrdersdetail, type: :model do
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number can't be blank")
       end
      
-      it 'phone_numberは10桁以上11桁以内の半角数値でないと保存できないこと' do
+      it 'phone_numberは半角数値でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '２２２２２２２'
         @orders_ordersdetail.valid?
         
         expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
       end
-      
+      it 'phone_numberは10桁以上11桁以内でないと保存できないこと' do
+        @orders_ordersdetail.phone_number = '1234567890123'
+        @orders_ordersdetail.valid?
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
+      end
+       
       it "tokenが空では登録できないこと" do
         @orders_ordersdetail.token = nil
         @orders_ordersdetail.valid?
         expect(@orders_ordersdetail.errors.full_messages).to include("Token can't be blank")
       end
+
+      it "user_idが空では登録できないこと" do
+        @orders_ordersdetail.user_id =  ''
+        @orders_ordersdetail.valid?
+        binding.pry
+        expect(@orders_ordersdetail.errors.full_messages).to include("")
+      end
+
+      it "item_idが空では登録できないこと" do
+        @orders_ordersdetail.item_id =  ''
+        @orders_ordersdetail.valid?
+        expect(@orders_ordersdetail.errors.full_messages).to include("")
+      end
+
     end
 
 
