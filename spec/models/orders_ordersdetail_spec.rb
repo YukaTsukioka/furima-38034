@@ -23,77 +23,79 @@ RSpec.describe OrdersOrdersdetail, type: :model do
         @orders_ordersdetail.post_code = ''
         @orders_ordersdetail.valid?
         
-        expect(@orders_ordersdetail.errors.full_messages).to include("Post code can't be blank")
+        expect(@orders_ordersdetail.errors.full_messages).to include("郵便番号を入力してください")
       end
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @orders_ordersdetail.post_code = '1234567'
         @orders_ordersdetail.valid?
-        expect(@orders_ordersdetail.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+       
+        expect(@orders_ordersdetail.errors.full_messages).to include("郵便番号ハイフンを入力してください")
       end
       it 'prefectureが未選択では登録できない' do
         @orders_ordersdetail.prefecture_id = '1'
         @orders_ordersdetail.valid?
-      
-        expect(@orders_ordersdetail.errors.full_messages).to include("Prefecture can't be blank")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("都道府県が空では登録できない")
       end
 
       it 'cityが空だと保存できないこと' do
         @orders_ordersdetail.city = ''
         @orders_ordersdetail.valid?
        
-        expect(@orders_ordersdetail.errors.full_messages).to include("City can't be blank")
+        expect(@orders_ordersdetail.errors.full_messages).to include("市区町村を入力してください")
       end
       it 'blockが空だと保存できないこと' do
         @orders_ordersdetail.block = ''
         @orders_ordersdetail.valid?
        
-        expect(@orders_ordersdetail.errors.full_messages).to include("Block can't be blank")
+        expect(@orders_ordersdetail.errors.full_messages).to include("番地を入力してください")
       end
       it 'phone_numberが空だと保存できないこと' do
         @orders_ordersdetail.phone_number = ''
         @orders_ordersdetail.valid?
-       
-        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number can't be blank")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("電話番号を入力してください")
       end
      
       it 'phone_numberは半角数値でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '２２２２２２２'
         @orders_ordersdetail.valid?
-       
-        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("電話番号半角数値で入力してください")
       end
       it 'phone_numberは10桁以上11桁以内でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '1234567890123'
         @orders_ordersdetail.valid?
        
-        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
+        expect(@orders_ordersdetail.errors.full_messages).to include("電話番号半角数値で入力してください")
       end
       it 'phone_numberは9桁以下でないと保存できないこと' do
         @orders_ordersdetail.phone_number = '12345678'
         @orders_ordersdetail.valid?
-       
-        expect(@orders_ordersdetail.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("電話番号半角数値で入力してください")
       end
       
        
       it "tokenが空では登録できないこと" do
         @orders_ordersdetail.token = nil
         @orders_ordersdetail.valid?
-        expect(@orders_ordersdetail.errors.full_messages).to include("Token can't be blank")
+        
+        expect(@orders_ordersdetail.errors.full_messages).to include("トークンを入力してください")
       end
 
       it "user_idが空では登録できないこと" do
         @orders_ordersdetail.user_id =  ''
         @orders_ordersdetail.valid?
         
-        expect(@orders_ordersdetail.errors.full_messages).to include("User can't be blank")
+        expect(@orders_ordersdetail.errors.full_messages).to include("Userを入力してください")
       end
 
       it "item_idが空では登録できないこと" do
         @orders_ordersdetail.item_id =  ''
         @orders_ordersdetail.valid?
        
-        expect(@orders_ordersdetail.errors.full_messages).to include("Item can't be blank")
+        expect(@orders_ordersdetail.errors.full_messages).to include("Itemを入力してください")
       end
 
     end
